@@ -27,3 +27,4 @@ The entropy results for "dummy.txt" was 7.9981
 There was more entropy in the file that I made that was random.  This was expected because
 there shoud be more repetition in the "lab1_data.txt file"
 # Work-Sample
+# Work-Sample
