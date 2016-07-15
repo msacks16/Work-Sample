@@ -1,30 +1,38 @@
-README for lab 1
-The way my program works is that I first read in the file through a File Input Stream by means of 
-entering the file name in the terminal window which reads the file in terms of bytes.  I then add each 
-byte type casted as a char to an array list of characters.  Next I close the File Input Stream and 
-run my function histogram.  This function takes one arguement which is an array list and returns 
-a string.  First I run a for each loop through each element in the array list of characters.  
-In each run I first convert the character into a string so that I can account for non printable characters.  
-The next part of the run runs each String through an if statement which checks to see if the key was already put 
-into the hashmap which is a private variable atop my program.  If it is the first time the key was seen it puts the 
-new key into the hash map, if it is not it updates the count of the key by adding one to the previous
-number of times the String was seen.  To print my hash map in a readable way, I run another for each
-loop through the finished hash table and so that I can print the hash table as one giant string.  The
-next function that I created was the calcEntropy that takes in one arguement in the form of a
-hash map.  The function returns a double which should be the calculated the entropy.  In this
-function I created an iterator that would run through the entry set of the hash map by means of
-a while loop.  The loop will run while the iterator has a next.  I then had to get the value
-of each map entry that the iterator found next and add it to the total sum of entropy which
-the varible is titled totentropy.  I was able to use the Math.log to take the log-base-2 because
-it was already built into the java library.  This program multiplied the totEntropy by -1 to
-make the entropy positive at the end which can be found in the equation given in lab 1.  Thus
-a histogram that turned non printable characters into the hexidecimal equivalent and kept the
-count of each character and a function that calculated the entropy was achieved.
+README for lab 2
+The way my program works is that I first read in the file through the sys.argv by means of 
+entering the file name in the terminal window which reads the file in terms of bytes.  I have 3 arguments you
+need to enter in this file.  The first is the text file you want to compressed.  The second is the .bin name you
+want to compress the file into for binary and the third is the uncompressing of the file which is a .txt ending
+After that my program parses the file and then compresses it using the LZ77 algorithm.  It packs the the offset,
+length, and char into a tuple.  After it does this I write it in my out file as bytes.  When I unpack I read
+the binary output file and unpack the offset and legnth and then the char.  I get an offset by shifting it
+6 spaces to the right and a length by subtracting offset+length-(offset shifted 6 to the left).  Once I get
+that I am able to start decoding the binary file back to the txt file.  If the offset and length are 0 I put
+the char from the tuple to the end of the string.  If they are not both equal to 0 I find the starting position
+and find the length and I start appending each character in the range to the end of the string by means of a for
+loop.  Then I return the string and write it back into the .txt file that you named in main.
 
-The entropy results for "lab1_data.txt" was 4.4934
-The entropy results for "dummy.txt" was 7.9981
+The entropy results for "lab1_data.txt" was 
+The compression I got for alice and wonderland ("alice.txt") was that I turned a 164 KB file into a 115 KB file
+thus 1-(115/164)=.2987 so I got about 30% compression for that file.  The entropy was 4.59 for txt and 6.9 for the
+bin
+The compression I got for Deadend ("deadend.txt") was that I turned a 44 KB file into a 31 KB file
+thus 1-(31/44)=.29545 so I got again about 30% compression for that file.  The entropy was 4.675 for txt and 
+6.87 for the bin
+The compression I got for lab1_data.txt was that I turned a 582 KB file into a 434 KB file
+thus 1-(434/582)=.254 so I got again about 25% compression for that file.  The entropy was 4.49 for txt and 6.83 
+for the bin
+The compression I got for 1M.bin was that I turned a 1 MB file into a 1.6 MB file
+thus 1-(1.6/1)=1.2 so I got again about -60% compression for that file. The entropy was 6.25 for txt (decompressed 
+file) and 6.76 for the bin.  This was probably due to the randomness of the file and lack of repitition.
+My non random non text file compressed about 30% as well.  This result makes sense because it was non random.
 
-There was more entropy in the file that I made that was random.  This was expected because
-there shoud be more repetition in the "lab1_data.txt file"
+Things like zip and gzip do a second pass of compression over the tuples to get almost double the amount
+of compression that was achieved in this program.  By doing a second pass you are further decreasing the bytes
+and further compressing the files.  This makes it easy to send those file over the internet where you can download
+the zip and then unpack it faster when its on your computer instead of unpacking it from the internet.
+
+
+# Work-Sample
 # Work-Sample
 # Work-Sample
